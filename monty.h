@@ -13,10 +13,13 @@
 
 /* Constants */
 #define DELIM "\b;:\t\a\r "
+/* "\b;:\t\a\r " */
 
 
 /* global Variables */
 extern char *arg;
+
+
 /* structures */
 
 /**
@@ -48,11 +51,32 @@ typedef struct instruction_s
         char *opcode;
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
+/**
+ * g_var - global variable structure
+ * @arg: argument integer
+ * @fd: filr descriptor
+ * @line_buf: points to the next element of the stack (or queue)
+ *
+ * Description: doubly linked list node structure
+ * for stack, queues, LIFO, FIFO Holberton project
+ */
+typedef struct global_var_s
+{
+	char *arg;
+	FILE *fd;
+	char *buff;
 
+} global_var_t;
+
+extern  global_var_t g_var;
+
+int main(int ac, char *av[]);
 /* Functions */
-int getfunc(char *command, char *argument, stack_t **stack, unsigned int linum);
+int getfunc(char *command, stack_t **stack, unsigned int linum);
 stack_t *make_front(stack_t **stack, int val);
 void push(stack_t **stack, unsigned int linum);
 void pall(stack_t **stack, unsigned int linum);
 stack_t *make_end(stack_t **stack, int val);
+ssize_t getline(char **lineptr, size_t *n, int fd);
+int fileno(FILE *stream);
 #endif /* _MONTY_H_ */

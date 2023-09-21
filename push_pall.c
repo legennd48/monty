@@ -8,27 +8,29 @@
 
 void push(stack_t **stack, unsigned int linum)
 {
-	int value = 0;
+	int value = 0, i = 0;
 
-	printf("control gets here push");
-
-	if (arg != NULL && strcmp(arg, "") != 0 && strcmp(arg, "0") != 0)
+	if (g_var.arg == NULL)
 	{
 		fprintf(stderr, "L%u: usage: push integer\n", linum);
 		exit(EXIT_FAILURE);
 	}
-	/* if (strlen(arg) > 1) */
-	/* { */
-	/* 	for (i = 0; arg[i]; i++) */
-	/* 	{ */
-	/* 		if (!isdigit(arg[i])) */
-	/* 		{ */
-	/* 			fprintf(stderr, "L%u: usage: push integer\n", linum); */
-	/* 			exit(EXIT_FAILURE); */
-	/* 		} */
-	/* 	} */
-	/* } */
-	value = atoi(arg);
+
+	if (g_var.arg[0] == '-' || g_var.arg[0] == '+')
+		i++;
+	while (g_var.arg[i])
+	{
+
+		if (isdigit(g_var.arg[i]) == 0)
+			continue;
+		else
+		{
+			fprintf(stderr, "L%u: usage: push integer\n", linum);
+			exit(EXIT_FAILURE);
+		}
+		i++;
+	}
+	value = atoi(g_var.arg);
 	if (*stack == NULL)
 		make_front(stack, value);
 	else
@@ -45,8 +47,6 @@ void push(stack_t **stack, unsigned int linum)
 void pall(stack_t **stack, unsigned int linum)
 {
 	stack_t *current = NULL;
-
-	printf("control gets here pall");
 
 	if (*stack == NULL)
 	{
