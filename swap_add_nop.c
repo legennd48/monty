@@ -75,21 +75,6 @@ void add(stack_t **head, unsigned int linum)
 	}
 }
 
-/* void add(stack_t **head, unsigned int linum) */
-/* { */
-/* 	if (*head == NULL || (*head)->next == NULL) */
-/* 	{ */
-/* 		fprintf(stderr, "L%u: can't add, stack too short\n", linum); */
-/* 		err_exit(head); */
-/* 	} */
-
-/* 	(*head)->next->n += (*head)->n; */
-/* 	(*head) = (*head)->next; */
-
-/* 	free((*head)->prev); */
-
-/* 	(*head)->prev = NULL; */
-/* } */
 
 /**
  * nop - does absolutely nothing

@@ -78,4 +78,8 @@ void swap(stack_t **head, unsigned int linum);
 void add(stack_t **head, unsigned int linum);
 void nop(stack_t **head, unsigned int linum);
 void add(stack_t **head, unsigned int linum);
+void sub(stack_t **head, unsigned int linum);
+void _div(stack_t **head, unsigned int linum);
+void mod(stack_t **head, unsigned int linum);
+void mul(stack_t **head, unsigned int linum);
 #endif /* _MONTY_H_ */
