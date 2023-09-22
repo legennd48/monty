@@ -74,7 +74,8 @@ stack_t *make_end(stack_t **stack, int val);
 void free_stack(stack_t *stack);
 void err_exit(stack_t **stack);
 void succ_exit(void);
-
-
-
+void swap(stack_t **head, unsigned int linum);
+void add(stack_t **head, unsigned int linum);
+void nop(stack_t **head, unsigned int linum);
+void add(stack_t **head, unsigned int linum);
 #endif /* _MONTY_H_ */
