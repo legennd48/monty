@@ -8,7 +8,7 @@
  */
 stack_t *make_front(stack_t **stack, int val)
 {
-	stack_t *new;
+	stack_t *new, *tmp = NULL;
 
 	if (stack == NULL)
 		return (NULL);
@@ -22,9 +22,17 @@ stack_t *make_front(stack_t **stack, int val)
 
 
 	new->n = val;
-	new->next = *stack;
+	new->next = NULL;
 	new->prev = NULL;
 
+	if (*stack == NULL)
+	{
+		*stack = new;
+		return (*stack);
+	}
+	tmp = *stack;
+	new->next = tmp;
+	tmp->prev = new;
 	*stack = new;
 
 	return (new);
@@ -38,8 +46,7 @@ stack_t *make_front(stack_t **stack, int val)
  */
 stack_t *make_end(stack_t **stack, int val)
 {
-	stack_t *new;
-	stack_t *temp;
+	stack_t *new, *temp = NULL;
 
 	if (stack == NULL)
 		return (NULL);
@@ -51,12 +58,20 @@ stack_t *make_end(stack_t **stack, int val)
 		exit(EXIT_FAILURE);
 	}
 
+	new->n = val;
+	new->next = NULL;
+	new->prev = NULL;
+
+	if (*stack == NULL)
+	{
+		*stack = new;
+		return (new);
+	}
 	temp = *stack;
 	while (temp->next != NULL)
 		temp = temp->next;
 
 	temp->next = new;
-	new->n = val;
 	new->prev = temp;
 	new->next = NULL;
 

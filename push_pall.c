@@ -8,12 +8,13 @@
 
 void push(stack_t **stack, unsigned int linum)
 {
-	int value = 0, i = 0;
+	int value = 0, i = 0, flag = 0;
+	char str[2];
 
 	if (g_var.arg == NULL)
 	{
 		fprintf(stderr, "L%u: usage: push integer\n", linum);
-		exit(EXIT_FAILURE);
+		err_exit(stack);
 	}
 
 	if (g_var.arg[0] == '-' || g_var.arg[0] == '+')
@@ -21,20 +22,28 @@ void push(stack_t **stack, unsigned int linum)
 	while (g_var.arg[i])
 	{
 
-		if (isdigit(g_var.arg[i]) == 0)
-			continue;
+		if (g_var.arg[i] >= 48 && g_var.arg[i] <= 57)
+		{
+			flag = 1;
+			str[0] = g_var.arg[i];
+			str[1] = '\0';
+			value = atoi(str);
+			break;
+		}
 		else
 		{
 			fprintf(stderr, "L%u: usage: push integer\n", linum);
-			exit(EXIT_FAILURE);
+			err_exit(stack);
 		}
 		i++;
 	}
-	value = atoi(g_var.arg);
-	if (*stack == NULL)
-		make_front(stack, value);
-	else
+	if (flag)
+	{
 		make_end(stack, value);
+		return;
+	}
+	fprintf(stderr, "L%u: usage: push integer\n", linum);
+	err_exit(stack);
 }
 
 
@@ -54,20 +63,43 @@ void pall(stack_t **stack, unsigned int linum)
 	}
 
 	if (*stack == NULL && linum != 1)
-	{
-		/* possible need to free */
-		exit(EXIT_SUCCESS);
-	}
+		succ_exit();
 
 	current = *stack;
 	while (current->next != NULL)
 		current = current->next;
 
-	while (current->prev != NULL)
+	while (current != NULL)
 	{
 		printf("%d\n", current->n);
 		current = current->prev;
 	}
+}
 
-	printf("%d\n", current->n);
+/**
+ * err_exit - frees the global variable and exit
+ * @stack: points to pointer to doubly linked list
+ *
+ * Return: nothing
+ */
+
+void err_exit(stack_t **stack)
+{
+	free(g_var.buff);
+	free_stack(*stack);
+	fclose(g_var.file);
+	exit(EXIT_FAILURE);
+}
+
+/**
+ * succ_exit - frees the global variable and exit
+ *
+ * Return: nothing
+ */
+
+void succ_exit(void)
+{
+	free(g_var.buff);
+	fclose(g_var.file);
+	exit(EXIT_SUCCESS);
 }

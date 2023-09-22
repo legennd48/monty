@@ -1,5 +1,4 @@
 #include "monty.h"
-#include <stdio.h>
 
 global_var_t g_var = {NULL, NULL, NULL};
 /**
@@ -12,48 +11,41 @@ global_var_t g_var = {NULL, NULL, NULL};
 int main(int ac, char *av[])
 {
 	unsigned int linum = 0;
-	ssize_t lines_read = 1;
+	FILE *file;
+	char *read;
 	stack_t *stack = NULL;
-	size_t bytes = 0;
-	int flag = 0, flag2 = 0;
-	char *cmd = NULL;
+	int bytes = 1024;
 
 	if (ac != 2)
 	{
 		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
-	g_var.fd = fopen(av[1], O_RDONLY);
-	if (g_var.fd == NULL)
+	file = fopen(av[1], "r");
+	g_var.file = file;
+	if (file == NULL)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", av[1]);
 		exit(EXIT_FAILURE);
 	}
-	lines_read = getline(&g_var.buff, &bytes, fileno(g_var.fd));
-	while (lines_read >= 0)
+	g_var.buff = malloc(bytes);
+	if (g_var.buff == NULL)
 	{
-		flag = 0;
-		linum++;
-		cmd = strtok(g_var.buff, DELIM);
-		if (!cmd)
-			flag2 = 1;
-		if (flag2 == 0)
-		{
-			if (cmd[0] == '#')
-			{
-				lines_read = getline(&g_var.buff, &bytes, fileno(g_var.fd));
-				flag = 1;
-			}
-		}
-		if (flag == 0)
-		{
-			getfunc(cmd, &stack, linum);
-			lines_read = getline(&g_var.buff, &bytes, fileno(g_var.fd));
-		}
+		fprintf(stderr, "Error: malloc failed\n");
+		exit(EXIT_FAILURE);
 	}
-	/*free stack */
+Here:
+	read = fgets(g_var.buff, bytes, file);
+	while (read != NULL)
+	{
+		linum++;
+/*		printf("L%u: %s", linum, read);*/
+		getfunc(read, &stack, linum);
+		goto Here;
+	}
+	free_stack(stack);
 	free(g_var.buff);
 	g_var.buff = NULL;
-	fclose(g_var.fd);
+	fclose(file);
 	return (0);
 }
