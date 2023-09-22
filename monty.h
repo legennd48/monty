@@ -3,21 +3,15 @@
 
 /* Headers */
 #include <stdio.h>
-#include <stdlib.h>
 #include <unistd.h>
+#include <stdlib.h>
+#include <stddef.h>
 #include <ctype.h>
 #include <string.h>
-#include <fcntl.h>
-#include <sys/types.h>
-#include <sys/stat.h>
 
 /* Constants */
-#define DELIM "\b;:\t\a\r "
+#define DELIM " \n\t"
 /* "\b;:\t\a\r " */
-
-
-/* global Variables */
-extern char *arg;
 
 
 /* structures */
@@ -63,20 +57,24 @@ typedef struct instruction_s
 typedef struct global_var_s
 {
 	char *arg;
-	FILE *fd;
+	FILE *file;
 	char *buff;
 
 } global_var_t;
 
 extern  global_var_t g_var;
 
-int main(int ac, char *av[]);
+
 /* Functions */
-int getfunc(char *command, stack_t **stack, unsigned int linum);
+int getfunc(char *line, stack_t **stack, unsigned int linum);
 stack_t *make_front(stack_t **stack, int val);
 void push(stack_t **stack, unsigned int linum);
 void pall(stack_t **stack, unsigned int linum);
 stack_t *make_end(stack_t **stack, int val);
-ssize_t getline(char **lineptr, size_t *n, int fd);
-int fileno(FILE *stream);
+void free_stack(stack_t *stack);
+void err_exit(stack_t **stack);
+void succ_exit(void);
+
+
+
 #endif /* _MONTY_H_ */
