@@ -14,9 +14,11 @@ int getfunc(char *line, stack_t **stack, unsigned int linum)
 	int i;
 	char *op = NULL;
 	instruction_t funcs[] = {
-		{"push", push}, {"pall", pall}, {"pint", pint}, {"pop", pop}, {"swap", swap}, {"add", add},
-		{"nop", nop}, {"sub", sub}, {"div", _div}, {"mul", mul},
-		{"mod", mod}, {"pchar", pchar}, {"pstr", pstr}, {NULL, NULL}};
+		{"push", push}, {"pall", pall}, {"pint", pint}, {"pop", pop},
+		{"swap", swap}, {"add", add}, {"nop", nop}, {"sub", sub},
+		{"div", _div}, {"mul", mul}, {"mod", mod}, {"pchar", pchar},
+		{"pstr", pstr}, {NULL, NULL}
+	};
 
 
 	op = strtok(line, " \t\n");

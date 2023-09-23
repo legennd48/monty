@@ -17,7 +17,7 @@ void pint(stack_t **stack, unsigned int linum)
 		fprintf(stderr, "L%u: can't pint, empty stack\n", linum);
 		err_exit(stack);
 	}
-	
+
 	tmp = *stack;
 	while (tmp->next != NULL)
 		tmp = tmp->next;
