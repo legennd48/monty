@@ -59,6 +59,7 @@ void push(stack_t **stack, unsigned int linum)
 void pall(stack_t **head, unsigned int linum)
 {
 	stack_t *current = NULL;
+
 	if (*head == NULL)
 		return;
 
