@@ -16,7 +16,7 @@ int getfunc(char *line, stack_t **stack, unsigned int linum)
 	instruction_t funcs[] = {
 		{"push", push}, {"pall", pall}, {"swap", swap}, {"add", add},
 		{"nop", nop}, {"sub", sub}, {"div", _div}, {"mul", mul},
-		{"mod", mod}, {NULL, NULL}
+		{"mod", mod}, {"pchar", pchar}, {"pstr", pstr}, {NULL, NULL}
 	};
 
 

@@ -27,9 +27,9 @@
  */
 typedef struct stack_s
 {
-        int n;
-        struct stack_s *prev;
-        struct stack_s *next;
+	int n;
+	struct stack_s *prev;
+	struct stack_s *next;
 } stack_t;
 
 /**
@@ -42,11 +42,12 @@ typedef struct stack_s
  */
 typedef struct instruction_s
 {
-        char *opcode;
-        void (*f)(stack_t **stack, unsigned int line_number);
+	char *opcode;
+	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
+
 /**
- * g_var - global variable structure
+ * global_var_s - global variable structure
  * @arg: argument integer
  * @fd: filr descriptor
  * @line_buf: points to the next element of the stack (or queue)
@@ -82,4 +83,6 @@ void sub(stack_t **head, unsigned int linum);
 void _div(stack_t **head, unsigned int linum);
 void mod(stack_t **head, unsigned int linum);
 void mul(stack_t **head, unsigned int linum);
+void pchar(stack_t **head, unsigned int linum);
+void pstr(stack_t **head, unsigned int linum);
 #endif /* _MONTY_H_ */
