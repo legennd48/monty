@@ -14,7 +14,7 @@ void pint(stack_t **stack, unsigned int linum)
 
 	if (stack == NULL || *stack == NULL)
 	{
-		fprintf(stderr, "L%u: can't pint, empty stack\n", linum);
+		fprintf(stderr, "L%u: can't pint, stack empty\n", linum);
 		err_exit(stack);
 	}
 
