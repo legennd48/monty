@@ -8,27 +8,29 @@
 
 void push(stack_t **stack, unsigned int linum)
 {
-	int value = 0, i = 0, flag = 0;
-	char str[2];
+	int value = 0, i = 0, flag = 0, neg = 0, j = 0;
+	char str[256];
 
 	if (g_var.arg == NULL)
 	{
 		fprintf(stderr, "L%u: usage: push integer\n", linum);
 		err_exit(stack);
 	}
-
-	if (g_var.arg[0] == '-' || g_var.arg[0] == '+')
+	if (g_var.arg[0] == '-')
+	{
+		neg = 1;
 		i++;
+	}
 	while (g_var.arg[i])
 	{
-
 		if (g_var.arg[i] >= 48 && g_var.arg[i] <= 57)
 		{
 			flag = 1;
-			str[0] = g_var.arg[i];
-			str[1] = '\0';
+			str[j] = g_var.arg[i];
+			str[j + 1] = '\0';
 			value = atoi(str);
-			break;
+			if (neg == 1)
+				value *= -1;
 		}
 		else
 		{
@@ -36,6 +38,7 @@ void push(stack_t **stack, unsigned int linum)
 			err_exit(stack);
 		}
 		i++;
+		j++;
 	}
 	if (flag)
 	{
@@ -49,21 +52,20 @@ void push(stack_t **stack, unsigned int linum)
 
 /**
  * pall - Print the elements of the stack
- * @stack: Pointer to the head of the stack
+ * @head: Pointer to the head of the stack
  * @linum: Line number of the instruction
  */
 
-void pall(stack_t **stack, unsigned int linum)
+void pall(stack_t **head, unsigned int linum)
 {
 	stack_t *current = NULL;
-
-	if (*stack == NULL)
+	if (*head == NULL)
 		return;
 
-	if (*stack == NULL && linum != 1)
+	if (*head == NULL && linum != 1)
 		succ_exit();
 
-	current = *stack;
+	current = *head;
 	while (current->next != NULL)
 		current = current->next;
 

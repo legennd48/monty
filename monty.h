@@ -27,9 +27,9 @@
  */
 typedef struct stack_s
 {
-        int n;
-        struct stack_s *prev;
-        struct stack_s *next;
+	int n;
+	struct stack_s *prev;
+	struct stack_s *next;
 } stack_t;
 
 /**
@@ -42,11 +42,12 @@ typedef struct stack_s
  */
 typedef struct instruction_s
 {
-        char *opcode;
-        void (*f)(stack_t **stack, unsigned int line_number);
+	char *opcode;
+	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
+
 /**
- * g_var - global variable structure
+ * global_var_s - global variable structure
  * @arg: argument integer
  * @fd: filr descriptor
  * @line_buf: points to the next element of the stack (or queue)
@@ -69,14 +70,21 @@ extern  global_var_t g_var;
 int getfunc(char *line, stack_t **stack, unsigned int linum);
 stack_t *make_front(stack_t **stack, int val);
 void push(stack_t **stack, unsigned int linum);
-void pall(stack_t **stack, unsigned int linum);
+void pall(stack_t **head, unsigned int linum);
 void pint(stack_t **stack, unsigned int linum);
 void pop(stack_t **stack, unsigned int linum);
 stack_t *make_end(stack_t **stack, int val);
 void free_stack(stack_t *stack);
 void err_exit(stack_t **stack);
 void succ_exit(void);
-
-
-
+void swap(stack_t **head, unsigned int linum);
+void add(stack_t **head, unsigned int linum);
+void nop(stack_t **head, unsigned int linum);
+void add(stack_t **head, unsigned int linum);
+void sub(stack_t **head, unsigned int linum);
+void _div(stack_t **head, unsigned int linum);
+void mod(stack_t **head, unsigned int linum);
+void mul(stack_t **head, unsigned int linum);
+void pchar(stack_t **head, unsigned int linum);
+void pstr(stack_t **head, unsigned int linum);
 #endif /* _MONTY_H_ */

@@ -14,24 +14,18 @@ int getfunc(char *line, stack_t **stack, unsigned int linum)
 	int i;
 	char *op = NULL;
 	instruction_t funcs[] = {
-		{"push", push}, {"pall", pall},
-		{"pint", pint},	{"pop", pop},
-		{NULL, NULL}
-	};
+		{"push", push}, {"pall", pall}, {"swap", swap}, {"add", add},
+		{"nop", nop}, {"sub", sub}, {"div", _div}, {"mul", mul},
+		{"mod", mod}, {"pchar", pchar}, {"pstr", pstr}, {NULL, NULL}};
 
 
 	op = strtok(line, " \t\n");
 	if (op == NULL || stack == NULL)
 		return (0);
-/*	printf("%s\n", op);*/
 
 	if (op && op[0] == '#')
 		return (0);
 	g_var.arg = strtok(NULL, " \t\n");
-/*	if (g_var.arg != NULL)*/
-/*		printf("%s\n", g_var.arg);*/
-/*	else*/
-/*		printf("(null)\n");*/
 
 	for (i = 0; funcs[i].opcode != NULL; i++)
 	{
@@ -47,7 +41,7 @@ int getfunc(char *line, stack_t **stack, unsigned int linum)
 		fclose(g_var.file);
 		free(g_var.buff);
 		free_stack(*stack);
-		exit(EXIT_FAILURE);/*potential free g_var */
+		exit(EXIT_FAILURE);
 	}
 	return (0);
 }
