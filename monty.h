@@ -70,6 +70,8 @@ int getfunc(char *line, stack_t **stack, unsigned int linum);
 stack_t *make_front(stack_t **stack, int val);
 void push(stack_t **stack, unsigned int linum);
 void pall(stack_t **stack, unsigned int linum);
+void pint(stack_t **stack, unsigned int linum);
+void pop(stack_t **stack, unsigned int linum);
 stack_t *make_end(stack_t **stack, int val);
 void free_stack(stack_t *stack);
 void err_exit(stack_t **stack);

@@ -58,9 +58,7 @@ void pall(stack_t **stack, unsigned int linum)
 	stack_t *current = NULL;
 
 	if (*stack == NULL)
-	{
 		return;
-	}
 
 	if (*stack == NULL && linum != 1)
 		succ_exit();

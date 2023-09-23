@@ -15,6 +15,7 @@ int getfunc(char *line, stack_t **stack, unsigned int linum)
 	char *op = NULL;
 	instruction_t funcs[] = {
 		{"push", push}, {"pall", pall},
+		{"pint", pint},	{"pop", pop},
 		{NULL, NULL}
 	};
 
