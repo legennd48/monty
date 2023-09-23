@@ -61,9 +61,7 @@ void pall(stack_t **head, unsigned int linum)
 	stack_t *current = NULL;
 
 	if (*head == NULL)
-	{
 		return;
-	}
 
 	if (*head == NULL && linum != 1)
 		succ_exit();
