@@ -40,7 +40,7 @@ void rotr(stack_t **head, unsigned int linum)
 {
 	stack_t *current = *head, *new_head;
 
-	(void)linum;
+	(void)linum; (void)new_head;
 
 	if (*head == NULL || (*head)->next == NULL)
 		return;

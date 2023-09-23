@@ -48,6 +48,9 @@ void pop(stack_t **stack, unsigned int linum)
 	while (tmp->next != NULL)
 		tmp = tmp->next;
 	prev = tmp->prev;
-	prev->next = NULL;
-	free(tmp);
+	if (prev != NULL)
+	{
+		prev->next = NULL;
+		free(tmp);
+	}
 }
