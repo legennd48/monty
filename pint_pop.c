@@ -36,7 +36,7 @@ void pint(stack_t **stack, unsigned int linum)
 
 void pop(stack_t **stack, unsigned int linum)
 {
-	stack_t *tmp, *prev = NULL;
+	stack_t *tmp;
 
 	if (stack == NULL || *stack == NULL)
 	{
@@ -47,10 +47,9 @@ void pop(stack_t **stack, unsigned int linum)
 	tmp = *stack;
 	while (tmp->next != NULL)
 		tmp = tmp->next;
-	prev = tmp->prev;
-	if (prev != NULL)
-	{
-		prev->next = NULL;
-		free(tmp);
-	}
+	if (tmp->prev == NULL)
+		*stack = NULL;
+	else
+		tmp->prev->next = NULL;
+	free(tmp);
 }
