@@ -52,23 +52,23 @@ void push(stack_t **stack, unsigned int linum)
 
 /**
  * pall - Print the elements of the stack
- * @stack: Pointer to the head of the stack
+ * @head: Pointer to the head of the stack
  * @linum: Line number of the instruction
  */
 
-void pall(stack_t **stack, unsigned int linum)
+void pall(stack_t **head, unsigned int linum)
 {
 	stack_t *current = NULL;
 
-	if (*stack == NULL)
+	if (*head == NULL)
 	{
 		return;
 	}
 
-	if (*stack == NULL && linum != 1)
+	if (*head == NULL && linum != 1)
 		succ_exit();
 
-	current = *stack;
+	current = *head;
 	while (current->next != NULL)
 		current = current->next;
 
