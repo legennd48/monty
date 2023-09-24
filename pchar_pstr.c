@@ -11,7 +11,7 @@ void pchar(stack_t **head, unsigned int linum)
 	stack_t *current = NULL;
 	char character;
 
-	if (*head == NULL)
+	if (*head == NULL || head == NULL)
 	{
 		fprintf(stderr, "L%u: can't pchar, stack empty\n", linum);
 		err_exit(head);
@@ -19,17 +19,17 @@ void pchar(stack_t **head, unsigned int linum)
 
 	current = *head;
 
-	if (current->n >= 0 && current->n <= 127)
+	if (current->n >= 0 && current->n < 128)
 	{
 		character = current->n;
 		putchar(character);
-		putchar('\n');
 	}
 	else
 	{
 		fprintf(stderr, "L%u: can't pchar, value out of range\n", linum);
 		err_exit(head);
 	}
+	putchar('\n');
 }
 
 /**
