@@ -10,24 +10,22 @@ void rotl(stack_t **head, unsigned int linum)
 {
 	stack_t *current, *new_head;
 
-	(void)linum;
+	(void)linum; (void)new_head;
 
 	if (*head == NULL || (*head)->next == NULL)
 		return;
 
 	current = *head;
 
-	new_head = (*head)->next;
-	new_head->prev = NULL;
 	while (current->next != NULL)
 		current = current->next;
 
 	current->next = *head;
+	current->prev->next = NULL;
+	*head = current;
 
-	(*head)->next = NULL;
-
-	(*head)->prev = current;
-	(*head) = new_head;
+	current->next->prev = current;
+	current->prev = NULL;
 }
 
 /**
@@ -38,7 +36,7 @@ void rotl(stack_t **head, unsigned int linum)
 
 void rotr(stack_t **head, unsigned int linum)
 {
-	stack_t *current = *head;
+	stack_t *current = *head, *new_head;
 
 	(void)linum;
 
@@ -51,13 +49,18 @@ void rotr(stack_t **head, unsigned int linum)
 
 	/* Update the pointers to rotate the stack */
 	current->next = *head;
-	(*head)->prev = current;
-	(*head) = current->next;
+	new_head = (*head)->next;
+	(*head)->next = NULL;
+	*head = new_head;
 	(*head)->prev = NULL;
+	current->next->prev = current;
+
+/*	(*head) = current->next;*/
+/*	(*head)->prev = NULL;*/
 
 	/* Adjust the links to complete the rotation */
-	while (current->next != NULL)
-		current = current->next;
+/*	while (current->next != NULL)*/
+/*		current = current->next;*/
 
-	current->next = NULL;
+/*	current->next = NULL;*/
 }
